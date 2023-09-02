@@ -68,8 +68,8 @@ MonoBehaviour:
       m_SpriteOverride: {fileID: 2710755927221942410, guid: 32df3b859cf09af499d05699371c49a0, type: 3}
     m_FromMain: 0
     m_EntryOverrideCount: 1
-  - m_Name: Arm Front 2
-    m_Hash: 900079432
+  - m_Name: AF2
+    m_Hash: 552437734
     m_CategoryList: []
     m_OverrideEntries:
     - m_Name: AF2.png
