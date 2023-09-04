@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VtGun : MonoBehaviour
+public class VtWeapon : MonoBehaviour
 {
     public int m_Layer = 0;
     public SpriteRenderer m_SpriteRenderer;
-    public Transform m_BulletSpawner;
+    public Transform m_AimPoint0;
+    public Transform m_AimPoint1;
 
     private void Start()
     {
