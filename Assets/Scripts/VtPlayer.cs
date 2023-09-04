@@ -29,18 +29,21 @@ public class VtPlayer : MonoBehaviour
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        m_FrontArmParentBone.rotation = Quaternion.Euler(0, 0, angle);
-        m_BackArmParentBone.rotation = Quaternion.Euler(0, 0, angle);
-
         if (worldMousePosition.x < transform.position.x)
         {
+            m_FrontArmParentBone.rotation = Quaternion.Euler(m_FrontArmParentBone.rotation.x, 180, -angle + 180);
+            m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 180, -angle + 180);
+
             transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
 
-            m_WeaponFront.localRotation = Quaternion.Euler(new Vector3(-180, 0, 0));
-            m_WeaponBack.localRotation = Quaternion.Euler(new Vector3(-180, 0, 0));
+            m_WeaponFront.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            m_WeaponBack.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }
         else
         {
+            m_FrontArmParentBone.rotation = Quaternion.Euler(m_FrontArmParentBone.rotation.x, 0, angle);
+            m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 0, angle);
+
             transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
 
             m_WeaponFront.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
