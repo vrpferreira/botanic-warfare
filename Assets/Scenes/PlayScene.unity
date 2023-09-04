@@ -734,7 +734,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1670789331596318623}
   - component: {fileID: 1670789331596318625}
-  - component: {fileID: 1670789331596318624}
   - component: {fileID: 1650093635}
   - component: {fileID: 1670789331596318626}
   m_Layer: 0
@@ -937,20 +936,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1670789331596318624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 569652437401784316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78c5f16cdb29d464099e345bfb9cf8a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  dividerAnimationWalk: 1
 --- !u!114 &1670789331596318625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -963,6 +948,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5851059f96f359446b356142adb62ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 3
+  dividerAnimationWalk: 1
   m_FrontArmParentBone: {fileID: 1266513353769802844}
   m_BackArmParentBone: {fileID: 4856668489742310239}
   m_WeaponFront: {fileID: 1226304167}
