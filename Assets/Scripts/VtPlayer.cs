@@ -8,8 +8,8 @@ public class VtPlayer : MonoBehaviour
     public float dividerAnimationWalk = 1;
     public Transform m_FrontArmParentBone;
     public Transform m_BackArmParentBone;
-    public Transform m_WeaponFront;
-    public Transform m_WeaponBack;
+    public VtGun m_WeaponFront;
+    public VtGun m_WeaponBack;
 
     private Animator m_Animator;
     private SpriteRenderer m_SpriteRenderer;
@@ -69,9 +69,6 @@ public class VtPlayer : MonoBehaviour
             m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 180, -angle + 180);
 
             transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
-
-            m_WeaponFront.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            m_WeaponBack.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }
         else
         {
@@ -79,9 +76,6 @@ public class VtPlayer : MonoBehaviour
             m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 0, angle);
 
             transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-
-            m_WeaponFront.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            m_WeaponBack.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }
     }
 }
