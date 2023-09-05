@@ -10,11 +10,6 @@ public class VtPlayer : MonoBehaviour
     public Transform m_BackArmParentBone;
     public VtWeapon m_WeaponFront;
     public VtWeapon m_WeaponBack;
-
-    public float m_AimLineExtensionDistance = 5.0f;
-    private Color m_AimLineExtensionColor = Color.green;
-
-
     private Animator m_Animator;
 
     private void Start()
@@ -36,7 +31,6 @@ public class VtPlayer : MonoBehaviour
         Vector3 moveDirection = new Vector3(horizontalInput, verticalInput, 0.0f);
         transform.position += moveDirection * m_MoveSpeed * Time.deltaTime;
 
-        // Define as condições para as animações
         if (moveDirection.magnitude > 0)
         {
             m_Animator.SetBool("Moving", true);
@@ -79,11 +73,5 @@ public class VtPlayer : MonoBehaviour
 
             transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }
-
-        Vector3 start = m_WeaponFront.m_AimPoint0.position;
-        Vector3 bulletDirection = (m_WeaponFront.m_AimPoint1.position - m_WeaponFront.m_AimPoint0.position).normalized;
-        Vector3 end = m_WeaponFront.m_AimPoint0.position + bulletDirection * (m_AimLineExtensionDistance + Vector3.Distance(m_WeaponFront.m_AimPoint0.position, m_WeaponFront.m_AimPoint1.position));
-
-        Debug.DrawLine(start, end, m_AimLineExtensionColor);
     }
 }
