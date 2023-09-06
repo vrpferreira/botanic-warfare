@@ -10,6 +10,7 @@ public class VtWeapon : MonoBehaviour
     public Transform m_AimPoint1;
     public float m_AimLineExtensionDistance = 5.0f;
     private Color m_AimLineExtensionColor = Color.green;
+    private Vector3 m_AimDirection;
 
     private void Start()
     {
@@ -24,9 +25,14 @@ public class VtWeapon : MonoBehaviour
     public void DrawAimLine()
     {
         Vector3 start = m_AimPoint0.position;
-        Vector3 bulletDirection = (m_AimPoint1.position - m_AimPoint0.position).normalized;
-        Vector3 end = m_AimPoint0.position + bulletDirection * (m_AimLineExtensionDistance + Vector3.Distance(m_AimPoint0.position, m_AimPoint1.position));
+        m_AimDirection = (m_AimPoint1.position - m_AimPoint0.position).normalized;
+        Vector3 end = m_AimPoint0.position + m_AimDirection * (m_AimLineExtensionDistance + Vector3.Distance(m_AimPoint0.position, m_AimPoint1.position));
 
         Debug.DrawLine(start, end, m_AimLineExtensionColor);
+    }
+
+    public Vector3 GetAimDirection()
+    {
+        return m_AimDirection;
     }
 }

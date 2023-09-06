@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +20,7 @@ public class VtPlayer : MonoBehaviour
 
     private void Update()
     {
-        Move();
+        //Move();
         Aim();
     }
 
@@ -52,24 +53,35 @@ public class VtPlayer : MonoBehaviour
 
     private void Aim()
     {
+        Vector3 vectorDirArmWeapon = m_WeaponFront.m_AimPoint1.position - m_FrontArmParentBone.position;
+        Vector3 vectorDirectionArm = m_FrontArmParentBone.right;
+
+        float angleArmWeapon = Vector3.Angle(vectorDirectionArm, vectorDirArmWeapon);
+
+        //Aim
         Vector3 mousePosition = Input.mousePosition;
         Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
         Vector3 direction = worldMousePosition - m_FrontArmParentBone.position;
 
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float angleArmMouse = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
 
         if (worldMousePosition.x < transform.position.x)
         {
-            m_FrontArmParentBone.rotation = Quaternion.Euler(m_FrontArmParentBone.rotation.x, 180, -angle + 180);
-            m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 180, -angle + 180);
+            angleArmMouse += angleArmWeapon;
+
+            m_FrontArmParentBone.rotation = Quaternion.Euler(m_FrontArmParentBone.rotation.x, 180, -angleArmMouse + 180);
+            m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 180, -angleArmMouse + 180);
 
             transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
         }
         else
         {
-            m_FrontArmParentBone.rotation = Quaternion.Euler(m_FrontArmParentBone.rotation.x, 0, angle);
-            m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 0, angle);
+            angleArmMouse -= angleArmWeapon;
+
+            m_FrontArmParentBone.rotation = Quaternion.Euler(m_FrontArmParentBone.rotation.x, 0, angleArmMouse);
+            m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 0, angleArmMouse);
 
             transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }
