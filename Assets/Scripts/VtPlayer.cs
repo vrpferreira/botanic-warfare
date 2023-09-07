@@ -9,6 +9,7 @@ public class VtPlayer : MonoBehaviour
     public float m_DividerAnimationWalk = 1;
     public Transform m_FrontArmParentBone;
     public Transform m_BackArmParentBone;
+    public Transform m_FrontArmDirectionPoint;
     public VtWeapon m_WeaponFront;
     public VtWeapon m_WeaponBack;
     private Animator m_Animator;
@@ -20,7 +21,7 @@ public class VtPlayer : MonoBehaviour
 
     private void Update()
     {
-        //Move();
+        Move();
         Aim();
     }
 
@@ -36,7 +37,7 @@ public class VtPlayer : MonoBehaviour
         {
             m_Animator.SetBool("Moving", true);
 
-            if (m_MoveSpeed > 5)
+            if (m_MoveSpeed > 3)
             {
                 m_Animator.SetBool("Running", true);
             }
@@ -53,12 +54,13 @@ public class VtPlayer : MonoBehaviour
 
     private void Aim()
     {
+        //Angle between arm and weapon
         Vector3 vectorDirArmWeapon = m_WeaponFront.m_AimPoint1.position - m_FrontArmParentBone.position;
-        Vector3 vectorDirectionArm = m_FrontArmParentBone.right;
+        Vector3 vectorDirectionArm = m_FrontArmDirectionPoint.position - m_FrontArmParentBone.position;
 
         float angleArmWeapon = Vector3.Angle(vectorDirectionArm, vectorDirArmWeapon);
 
-        //Aim
+        //Rotate arm according mouse position
         Vector3 mousePosition = Input.mousePosition;
         Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
@@ -66,22 +68,23 @@ public class VtPlayer : MonoBehaviour
 
         float angleArmMouse = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-
         if (worldMousePosition.x < transform.position.x)
         {
-            angleArmMouse += angleArmWeapon;
+            //Final rotation for arm
+            float finalRotation = -angleArmMouse - angleArmWeapon + 180;
 
-            m_FrontArmParentBone.rotation = Quaternion.Euler(m_FrontArmParentBone.rotation.x, 180, -angleArmMouse + 180);
-            m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 180, -angleArmMouse + 180);
+            m_FrontArmParentBone.rotation = Quaternion.Euler(m_FrontArmParentBone.rotation.x, 180, finalRotation);
+            m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 180, finalRotation);
 
             transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
         }
         else
         {
-            angleArmMouse -= angleArmWeapon;
+            //Final rotation for arm
+            float finalRotation = angleArmMouse - angleArmWeapon;
 
-            m_FrontArmParentBone.rotation = Quaternion.Euler(m_FrontArmParentBone.rotation.x, 0, angleArmMouse);
-            m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 0, angleArmMouse);
+            m_FrontArmParentBone.rotation = Quaternion.Euler(m_FrontArmParentBone.rotation.x, 0, finalRotation);
+            m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 0, finalRotation);
 
             transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }

@@ -200,6 +200,37 @@ MonoBehaviour:
   m_CategoryHash: 0.00000073499535
   m_labelHash: 0.00000073499535
   m_SpriteKey: 2.3992824e-12
+--- !u!1 &367090995
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 367090996}
+  m_Layer: 0
+  m_Name: Arm Direction Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &367090996
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367090995}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.2, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1266513353769802844}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,6 +844,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6864600460309537322}
+  - {fileID: 367090996}
   m_Father: {fileID: 56860688550352653}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
@@ -897,9 +929,9 @@ MonoBehaviour:
   m_DividerAnimationWalk: 1
   m_FrontArmParentBone: {fileID: 1266513353769802844}
   m_BackArmParentBone: {fileID: 4856668489742310239}
+  m_FrontArmDirectionPoint: {fileID: 367090996}
   m_WeaponFront: {fileID: 6040264895111936115}
   m_WeaponBack: {fileID: 1191654926}
-  m_AimLineExtensionDistance: 5
 --- !u!95 &1670789331596318626
 Animator:
   serializedVersion: 5
