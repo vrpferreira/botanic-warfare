@@ -5,6 +5,14 @@ using UnityEngine;
 
 public class VtPlayer : MonoBehaviour
 {
+    public enum WeaponMode
+    {
+        Single,
+        Duo
+    }
+
+    public WeaponMode m_WeaponMode;
+
     public float m_MoveSpeed = 5;
     public float m_DividerAnimationWalk = 1;
     public Transform m_FrontArmParentBone;
@@ -22,6 +30,7 @@ public class VtPlayer : MonoBehaviour
     private void Update()
     {
         Move();
+        HandleInput();
         Aim();
     }
 
@@ -52,6 +61,11 @@ public class VtPlayer : MonoBehaviour
         }
     }
 
+    private void HandleInput()
+    {
+        HandleWeaponMode();
+    }
+
     private void Aim()
     {
         //Angle between arm and weapon
@@ -74,7 +88,10 @@ public class VtPlayer : MonoBehaviour
             float finalRotation = -angleArmMouse - angleArmWeapon + 180;
 
             m_FrontArmParentBone.rotation = Quaternion.Euler(m_FrontArmParentBone.rotation.x, 180, finalRotation);
-            m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 180, finalRotation);
+            if (m_WeaponMode == WeaponMode.Duo)
+            {
+                m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 180, finalRotation);
+            }
 
             transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
         }
@@ -84,9 +101,33 @@ public class VtPlayer : MonoBehaviour
             float finalRotation = angleArmMouse - angleArmWeapon;
 
             m_FrontArmParentBone.rotation = Quaternion.Euler(m_FrontArmParentBone.rotation.x, 0, finalRotation);
-            m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 0, finalRotation);
+            if (m_WeaponMode == WeaponMode.Duo)
+            {
+                m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 0, finalRotation);
+            }
 
             transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        }
+    }
+
+    private void HandleWeaponMode()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            m_WeaponMode = WeaponMode.Single;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            m_WeaponMode = WeaponMode.Duo;
+        }
+
+        if (m_WeaponMode == WeaponMode.Single)
+        {
+            m_WeaponBack.gameObject.SetActive(false);
+        }
+        else
+        {
+            m_WeaponBack.gameObject.SetActive(true);
         }
     }
 }
