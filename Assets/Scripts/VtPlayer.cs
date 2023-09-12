@@ -33,7 +33,7 @@ public class VtPlayer : MonoBehaviour
         Vector3 moveDirection = new Vector3(horizontalInput, verticalInput, 0.0f);
         transform.position += moveDirection * m_MoveSpeed * Time.deltaTime;
 
-        if (moveDirection.magnitude > 0)
+        /*if (moveDirection.magnitude > 0)
         {
             m_Animator.SetBool("Moving", true);
 
@@ -49,7 +49,7 @@ public class VtPlayer : MonoBehaviour
         else
         {
             m_Animator.SetBool("Moving", false);
-        }
+        }*/
     }
 
     private void Aim()
