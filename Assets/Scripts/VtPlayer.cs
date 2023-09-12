@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class VtPlayer : MonoBehaviour
 {
+    public enum WeaponMode
+    {
+        Single,
+        Dual
+    }
+    public WeaponMode m_WeaponMode;
+
     public float m_MoveSpeed = 5;
     public float m_DividerAnimationWalk = 1;
     public Transform m_FrontArmParentBone;
@@ -16,11 +23,14 @@ public class VtPlayer : MonoBehaviour
 
     private void Start()
     {
+        m_WeaponMode = WeaponMode.Single;
         m_Animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
+        HandleInput();
+        CheckWeaponMode();
         Move();
         Aim();
     }
@@ -87,6 +97,30 @@ public class VtPlayer : MonoBehaviour
             m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 0, finalRotation);
 
             transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        }
+    }
+
+    private void CheckWeaponMode()
+    {
+        if (m_WeaponMode == WeaponMode.Single)
+        {
+            m_Animator.SetBool("hasSingleWeapon", true);
+        }
+        else if (m_WeaponMode == WeaponMode.Dual)
+        {
+            m_Animator.SetBool("hasSingleWeapon", false);
+        }
+    }
+
+    private void HandleInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            m_WeaponMode = WeaponMode.Single;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            m_WeaponMode = WeaponMode.Dual;
         }
     }
 }
