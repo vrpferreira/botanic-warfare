@@ -8,9 +8,10 @@ public class VtWeapon : MonoBehaviour
     public SpriteRenderer m_SpriteRenderer;
     public Transform m_AimPoint0;
     public Transform m_AimPoint1;
-    public float m_AimLineExtensionDistance = 5.0f;
+    public float m_AimLineExtensionDistance = 0f;
     private Color m_AimLineExtensionColor = Color.green;
     private Vector3 m_AimDirection;
+    private Vector3 m_MappedAimMousePosition;
 
     private void Start()
     {
@@ -24,15 +25,17 @@ public class VtWeapon : MonoBehaviour
 
     public void DrawAimLine()
     {
-        Vector3 start = m_AimPoint0.position;
         m_AimDirection = (m_AimPoint1.position - m_AimPoint0.position).normalized;
-        Vector3 end = m_AimPoint0.position + m_AimDirection * (m_AimLineExtensionDistance + Vector3.Distance(m_AimPoint0.position, m_AimPoint1.position));
 
-        Debug.DrawLine(start, end, m_AimLineExtensionColor);
+        Vector3 start = m_AimPoint0.position;
+
+        m_MappedAimMousePosition = start + m_AimDirection * m_AimLineExtensionDistance;
+
+        Debug.DrawLine(start, m_MappedAimMousePosition, m_AimLineExtensionColor);
     }
 
-    public Vector3 GetAimDirection()
+    public Vector3 GetMappedAimMousePosition()
     {
-        return m_AimDirection;
+        return m_MappedAimMousePosition;
     }
 }

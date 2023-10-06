@@ -68,10 +68,29 @@ public class VtPlayer : MonoBehaviour
 
         float angleArmMouse = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
+
+
+        float distance = Vector2.Distance(m_FrontArmParentBone.position, worldMousePosition);
+
+        //Line arm direction
+        Vector3 end = m_FrontArmParentBone.position + vectorDirectionArm.normalized * distance;
+
+        Debug.DrawLine(m_FrontArmParentBone.position, end, new Color(0, 1, 0.5f));
+
+        //Line Arm - Weapon aim
+        m_WeaponFront.m_AimLineExtensionDistance = distance;
+        Vector3 aimPoint = m_WeaponFront.GetMappedAimMousePosition();
+        //Debug.DrawLine(m_FrontArmParentBone.position, aimPoint, new Color(1, 0, 1));
+
+        Vector3 vec1 = (aimPoint - m_FrontArmParentBone.position).normalized;
+        Vector3 vec2 = (end - m_FrontArmParentBone.position).normalized;
+        float ang2 = Vector3.Angle(vec1, vec2);
+        print(ang2);
+
         if (worldMousePosition.x < transform.position.x)
         {
             //Final rotation for arm
-            float finalRotation = -angleArmMouse - angleArmWeapon + 180;
+            float finalRotation = -angleArmMouse + 180 - ang2;
 
             m_FrontArmParentBone.rotation = Quaternion.Euler(m_FrontArmParentBone.rotation.x, 180, finalRotation);
             m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 180, finalRotation);
@@ -81,7 +100,7 @@ public class VtPlayer : MonoBehaviour
         else
         {
             //Final rotation for arm
-            float finalRotation = angleArmMouse - angleArmWeapon;
+            float finalRotation = angleArmMouse - ang2;
 
             m_FrontArmParentBone.rotation = Quaternion.Euler(m_FrontArmParentBone.rotation.x, 0, finalRotation);
             m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 0, finalRotation);
