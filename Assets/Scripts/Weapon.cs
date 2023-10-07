@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VtWeapon : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
     public int m_Layer = 0;
     public SpriteRenderer m_SpriteRenderer;
     public Transform m_AimPoint0;
     public Transform m_AimPoint1;
+    public Bullet m_Bullet;
 
     private float m_AimLineDistance = 0f;
     private Color m_AimLineExtensionColor = Color.green;
@@ -25,7 +26,7 @@ public class VtWeapon : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            print("Shoot");
+            this.Shoot();
         }
     }
 
@@ -46,5 +47,11 @@ public class VtWeapon : MonoBehaviour
     public void SetAimLindeDistance(float distance)
     {
         m_AimLineDistance = distance;
+    }
+
+    private void Shoot()
+    {
+        Bullet bullet = Instantiate(m_Bullet, m_AimPoint0.position, this.transform.rotation);
+        bullet.SetDirection(m_AimDirection);
     }
 }

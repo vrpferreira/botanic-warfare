@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class VtPlayer : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public float m_MoveSpeed = 5;
     public float m_DividerAnimationWalk = 1;
     public Transform m_FrontArmParentBone;
     public Transform m_BackArmParentBone;
     public Transform m_FrontArmDirectionPoint;
-    public VtWeapon m_WeaponFront;
-    public VtWeapon m_WeaponBack;
+    public Weapon m_WeaponFront;
+    public Weapon m_WeaponBack;
     private Animator m_Animator;
 
     private void Start()

@@ -197,4 +197,4 @@ MonoBehaviour:
   m_SpriteRenderer: {fileID: 9190874814397113830}
   m_AimPoint0: {fileID: 3189650882383743054}
   m_AimPoint1: {fileID: 6877665874586969439}
-  m_AimLineExtensionDistance: 5
+  m_Bullet: {fileID: 409612065917562958, guid: fa9a7f9ff795df24f83ca4ea26e198f0, type: 3}
