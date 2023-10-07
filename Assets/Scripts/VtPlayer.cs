@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class VtPlayer : MonoBehaviour
@@ -66,6 +63,8 @@ public class VtPlayer : MonoBehaviour
         float distance = Vector2.Distance(m_FrontArmParentBone.position, worldMousePosition);
 
         m_WeaponFront.SetAimLindeDistance(distance);
+        m_WeaponBack.SetAimLindeDistance(distance);
+
         Vector3 weaponMousePointMapped = m_WeaponFront.GetMappedAimMousePosition();
 
         Vector3 end = m_FrontArmParentBone.position + vectorDirectionArm * distance;

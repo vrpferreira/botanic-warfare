@@ -22,6 +22,11 @@ public class VtWeapon : MonoBehaviour
     private void Update()
     {
         DrawAimLine();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            print("Shoot");
+        }
     }
 
     public void DrawAimLine()
