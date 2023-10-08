@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -36,7 +34,7 @@ public class Weapon : MonoBehaviour
 
         m_MappedAimMousePosition = m_AimPoint0.position + m_AimDirection * m_AimLineDistance;
 
-        Debug.DrawLine(m_AimPoint0.position, m_MappedAimMousePosition, m_AimLineExtensionColor);
+        //Debug.DrawLine(m_AimPoint0.position, m_MappedAimMousePosition, m_AimLineExtensionColor);
     }
 
     public Vector3 GetMappedAimMousePosition()
@@ -51,7 +49,14 @@ public class Weapon : MonoBehaviour
 
     private void Shoot()
     {
-        Bullet bullet = Instantiate(m_Bullet, m_AimPoint0.position, this.transform.rotation);
-        bullet.SetDirection(m_AimDirection);
+        Bullet bullet = BulletObjectPool.m_Instance.GetPooledObject();
+
+        if (bullet != null)
+        {
+            bullet.transform.position = m_AimPoint0.position;
+            bullet.transform.rotation = this.transform.rotation;
+            bullet.SetDirection(m_AimDirection);
+            bullet.gameObject.SetActive(true);
+        }
     }
 }
