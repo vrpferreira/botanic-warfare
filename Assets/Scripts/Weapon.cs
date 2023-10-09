@@ -15,6 +15,7 @@ public class Weapon : MonoBehaviour
     public Transform m_AimPoint1;
     public Bullet m_Bullet;
     public float m_FireRate = 1;
+    public float m_BulletSpeed = 1;
 
     private float m_AimLineDistance = 0f;
     private Color m_AimLineExtensionColor = Color.green;
@@ -70,6 +71,7 @@ public class Weapon : MonoBehaviour
             bullet.transform.position = m_AimPoint0.position;
             bullet.transform.rotation = this.transform.rotation;
             bullet.SetDirection(m_AimDirection);
+            bullet.SetSpeed(m_BulletSpeed);
             bullet.gameObject.SetActive(true);
         }
     }

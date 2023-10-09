@@ -652,6 +652,10 @@ PrefabInstance:
       propertyPath: m_FireRate
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 1269571229111827799, guid: 455b6aacf2714eb4c9f84f2f85582519, type: 3}
+      propertyPath: m_BulletSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8936283717718921401, guid: 455b6aacf2714eb4c9f84f2f85582519, type: 3}
       propertyPath: m_Name
       value: AK-47
@@ -1844,6 +1848,10 @@ PrefabInstance:
     - target: {fileID: 1269571229111827799, guid: 455b6aacf2714eb4c9f84f2f85582519, type: 3}
       propertyPath: m_FireRate
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1269571229111827799, guid: 455b6aacf2714eb4c9f84f2f85582519, type: 3}
+      propertyPath: m_BulletSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8936283717718921401, guid: 455b6aacf2714eb4c9f84f2f85582519, type: 3}
       propertyPath: m_Name

@@ -29,6 +29,11 @@ public class Bullet : MonoBehaviour
         m_Direction = direction;
     }
 
+    public void SetSpeed(float speed)
+    {
+        m_Speed = speed;
+    }
+
     private bool IsOffScreen()
     {
         Vector3 objectPosition = transform.position;
