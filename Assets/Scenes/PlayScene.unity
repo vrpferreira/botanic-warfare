@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PooledObjects: []
-  m_AmountToPool: 10
+  m_AmountToPool: 200
   m_ObjectToPool: {fileID: 409612065917562958, guid: fa9a7f9ff795df24f83ca4ea26e198f0, type: 3}
 --- !u!4 &748163700
 Transform:
@@ -643,6 +643,14 @@ PrefabInstance:
     - target: {fileID: 1269571229111827799, guid: 455b6aacf2714eb4c9f84f2f85582519, type: 3}
       propertyPath: m_Layer
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1269571229111827799, guid: 455b6aacf2714eb4c9f84f2f85582519, type: 3}
+      propertyPath: m_FireMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1269571229111827799, guid: 455b6aacf2714eb4c9f84f2f85582519, type: 3}
+      propertyPath: m_FireRate
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8936283717718921401, guid: 455b6aacf2714eb4c9f84f2f85582519, type: 3}
       propertyPath: m_Name
@@ -1828,6 +1836,14 @@ PrefabInstance:
     - target: {fileID: 1269571229111827799, guid: 455b6aacf2714eb4c9f84f2f85582519, type: 3}
       propertyPath: m_Layer
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1269571229111827799, guid: 455b6aacf2714eb4c9f84f2f85582519, type: 3}
+      propertyPath: m_FireMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1269571229111827799, guid: 455b6aacf2714eb4c9f84f2f85582519, type: 3}
+      propertyPath: m_FireRate
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8936283717718921401, guid: 455b6aacf2714eb4c9f84f2f85582519, type: 3}
       propertyPath: m_Name

@@ -2,16 +2,25 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    public enum FireMode
+    {
+        Auto,
+        Single
+    }
+
+    public FireMode m_FireMode;
     public int m_Layer = 0;
     public SpriteRenderer m_SpriteRenderer;
     public Transform m_AimPoint0;
     public Transform m_AimPoint1;
     public Bullet m_Bullet;
+    public float m_FireRate = 1;
 
     private float m_AimLineDistance = 0f;
     private Color m_AimLineExtensionColor = Color.green;
     private Vector3 m_AimDirection;
     private Vector3 m_MappedAimMousePosition;
+    private float m_TimeSinceLastShot = 0;
 
     private void Start()
     {
@@ -22,9 +31,14 @@ public class Weapon : MonoBehaviour
     {
         DrawAimLine();
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && m_FireMode == FireMode.Single)
         {
             this.Shoot();
+        }
+        else if (Input.GetMouseButton(0) && m_FireMode == FireMode.Auto && Time.time - m_TimeSinceLastShot >= m_FireRate)
+        {
+            this.Shoot();
+            m_TimeSinceLastShot = Time.time;
         }
     }
 
