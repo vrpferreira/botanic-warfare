@@ -51,7 +51,6 @@ public class Player : MonoBehaviour
 
     private void Aim()
     {
-
         //Rotate arm according mouse position
         Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 dirArmMouse = worldMousePosition - m_FrontArmParentBone.position;

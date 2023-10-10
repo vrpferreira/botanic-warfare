@@ -25,6 +25,7 @@ public class BulletObjectPool : MonoBehaviour
         {
             obj = Instantiate(m_ObjectToPool);
             obj.gameObject.SetActive(false);
+            obj.transform.parent = this.transform;
             m_PooledObjects.Add(obj);
         }
     }
