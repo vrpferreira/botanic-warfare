@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float m_Damage = 1;
-    [SerializeField] private float m_Speed = 1;
+    private int m_Damage = 1;
+    private float m_Speed = 1;
     private Vector3 m_Direction = Vector3.zero;
     private Rigidbody2D m_Rigidbody;
-    Camera m_MainCamera;
+    private Camera m_MainCamera;
 
     void Start()
     {
@@ -46,7 +46,12 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        print(other.gameObject.name);
+        Enemy enemy = other.gameObject.GetComponent<Enemy>();
+        if (enemy)
+        {
+            enemy.ApplyDamage(m_Damage);
+        }
+
         this.gameObject.SetActive(false);
     }
 }
