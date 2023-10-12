@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private int m_Health = 0;
+    [SerializeField] private int m_Health = 0;
+    [SerializeField] private int m_MaxHealth = 10;
+    [SerializeField] private FloatingHealthBar m_FloatingHealthBar;
 
     void Start()
     {
-
+        m_Health = m_MaxHealth;
+        m_FloatingHealthBar.UpdateHealthBar(m_Health, m_MaxHealth);
     }
 
     void Update()
@@ -22,6 +25,8 @@ public class Enemy : MonoBehaviour
         {
             m_Health = 0;
         }
+
+        m_FloatingHealthBar.UpdateHealthBar(m_Health, m_MaxHealth);
     }
 
     public int GetHealth()
