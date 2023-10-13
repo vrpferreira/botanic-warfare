@@ -6,13 +6,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int m_MaxHealth = 10;
     [SerializeField] private FloatingHealthBar m_FloatingHealthBar;
 
-    void Start()
+    public void Start()
     {
         m_Health = m_MaxHealth;
         m_FloatingHealthBar.UpdateHealthBar(m_Health, m_MaxHealth);
     }
 
-    void Update()
+    public void Update()
     {
 
     }
