@@ -1436,9 +1436,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f09e25bdf82224da28c7f78a410b2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Health: 0
   m_MaxHealth: 10
   m_FloatingHealthBar: {fileID: 29395408}
+  m_Player: {fileID: 1670789331596318623}
+  m_Speed: 2
 --- !u!4 &1619843122
 Transform:
   m_ObjectHideFlags: 0
@@ -1778,9 +1779,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9cf049a7ff5d1a43807cdd98ede55b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Health: 0
   m_MaxHealth: 30
   m_FloatingHealthBar: {fileID: 1207964312}
+  m_Player: {fileID: 1670789331596318623}
+  m_Speed: 2
 --- !u!4 &2113742778
 Transform:
   m_ObjectHideFlags: 0
@@ -1981,7 +1983,7 @@ GameObject:
   - component: {fileID: 1670789331596318626}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

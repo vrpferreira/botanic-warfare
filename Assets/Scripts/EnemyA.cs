@@ -4,6 +4,6 @@ public class EnemyA : Enemy
 {
     private void Update()
     {
-
+        base.Update();
     }
 }
