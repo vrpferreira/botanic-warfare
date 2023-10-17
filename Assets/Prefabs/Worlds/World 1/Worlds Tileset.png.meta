@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c8c284eac38178845bbf5f521f3d4fa7
+guid: f4b924181fe902549af26289905f71bd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 400
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,11 +105,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tilemap_0
+      name: Worlds Tileset_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1760
+        y: 400
         width: 400
         height: 400
       alignment: 0
@@ -119,18 +119,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0659aa06920400e419037eb5f00236e1
-      internalID: -2036047909
+      spriteID: accf9fc4b6ab11f47b49562c5e5e7455
+      internalID: 1455818591
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tilemap_1
+      name: Worlds Tileset_1
       rect:
         serializedVersion: 2
         x: 400
-        y: 1760
+        y: 400
         width: 400
         height: 400
       alignment: 0
@@ -140,18 +140,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cbcf5a4dd883e604a9096edc96068e5e
-      internalID: 1958186946
+      spriteID: 1fb8730112d988e44b9a53686064594f
+      internalID: -1138795138
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tilemap_2
+      name: Worlds Tileset_2
       rect:
         serializedVersion: 2
         x: 0
-        y: 1360
+        y: 0
         width: 400
         height: 400
       alignment: 0
@@ -161,18 +161,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65e5ac3f74ea3824f9cf65d422024a3e
-      internalID: 2063510192
+      spriteID: bddf641ce9fd4054a84bf538a60a6236
+      internalID: 1883940529
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tilemap_3
+      name: Worlds Tileset_3
       rect:
         serializedVersion: 2
         x: 400
-        y: 1360
+        y: 0
         width: 400
         height: 400
       alignment: 0
@@ -182,92 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d38b01ac525de1e4684ae0dc5cd93028
-      internalID: -502572985
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tilemap_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 960
-        width: 400
-        height: 400
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6fd5dbdebd933f040a349646a5ca492a
-      internalID: 1751047575
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tilemap_5
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 960
-        width: 400
-        height: 400
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: da38c8d9ca20231438b7c1a5ecb2546a
-      internalID: -111873548
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tilemap_6
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 560
-        width: 400
-        height: 400
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e2735c370c147004e80a395dbcce7c59
-      internalID: 1130473243
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tilemap_7
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 560
-        width: 400
-        height: 400
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d5e3c5012c1193f448f9edba086637f4
-      internalID: 466834047
+      spriteID: d54fe50c252bf0a43929f18b3f484bac
+      internalID: 69855679
       vertices: []
       indices: 
       edges: []
@@ -283,14 +199,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tilemap_6: 1130473243
-      Tilemap_4: 1751047575
-      Tilemap_7: 466834047
-      Tilemap_3: -502572985
-      Tilemap_2: 2063510192
-      Tilemap_0: -2036047909
-      Tilemap_1: 1958186946
-      Tilemap_5: -111873548
+      Worlds Tileset_2: 1883940529
+      Worlds Tileset_0: 1455818591
+      Worlds Tileset_1: -1138795138
+      Worlds Tileset_3: 69855679
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
