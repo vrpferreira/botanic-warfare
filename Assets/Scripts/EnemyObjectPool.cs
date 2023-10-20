@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class EnemyObjectPool : MonoBehaviour
 {
     public static EnemyObjectPool m_Instance;
+    [SerializeField] private Tilemap m_Tilemap;
     [SerializeField] private Player m_Player;
     [SerializeField] private SerializableEnemyDictionary m_EnemyDictionary = new SerializableEnemyDictionary();
     private Dictionary<Type, List<Enemy>> m_PooledEnemiesDictionary;
@@ -84,7 +86,11 @@ public class EnemyObjectPool : MonoBehaviour
 
                 if (enemy != null)
                 {
-                    enemy.transform.position = new Vector3(0, 0, 0);
+                    BoundsInt bounds = m_Tilemap.cellBounds;
+                    Vector3Int tilePosition;
+                    tilePosition = new Vector3Int(UnityEngine.Random.Range(bounds.x, bounds.x + bounds.size.x), UnityEngine.Random.Range(bounds.y, bounds.y + bounds.size.y), 0);
+                    Vector3 spawnPosition = m_Tilemap.GetCellCenterWorld(tilePosition);
+                    enemy.transform.position = spawnPosition;
                     enemy.SetPlayer(m_Player);
                     enemy.gameObject.SetActive(true);
                 }
