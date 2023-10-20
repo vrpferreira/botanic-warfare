@@ -5,7 +5,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int m_MaxHealth = 10;
     [SerializeField] private float m_Speed = 2;
     [SerializeField] private FloatingHealthBar m_FloatingHealthBar;
-    [SerializeField] Transform m_Player;
+    [SerializeField] Player m_Player;
 
     private int m_Health = 0;
 
@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     {
         if (m_Player != null)
         {
-            Vector3 direction = m_Player.position - transform.position;
+            Vector3 direction = m_Player.transform.position - transform.position;
             direction.Normalize();
 
             transform.position += direction * m_Speed * Time.deltaTime;
@@ -41,5 +41,10 @@ public class Enemy : MonoBehaviour
     public int GetHealth()
     {
         return m_Health;
+    }
+
+    public void SetPlayer(Player player)
+    {
+        m_Player = player;
     }
 }

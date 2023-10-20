@@ -18,7 +18,6 @@ public class Weapon : MonoBehaviour
     public float m_BulletSpeed = 1;
 
     private float m_AimLineDistance = 0f;
-    private Color m_AimLineExtensionColor = Color.green;
     private Vector3 m_AimDirection;
     private Vector3 m_MappedAimMousePosition;
     private float m_TimeSinceLastShot = 0;
