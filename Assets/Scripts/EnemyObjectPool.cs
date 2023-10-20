@@ -78,8 +78,7 @@ public class EnemyObjectPool : MonoBehaviour
 
             if (Time.time - lastSpawnTime >= spawnTime)
             {
-                lastSpawnTime = Time.time;
-                m_PooledEnemiesLastSpawnTimeDictionary[typeOfEnemy] = lastSpawnTime;
+                m_PooledEnemiesLastSpawnTimeDictionary[typeOfEnemy] = Time.time;
 
                 Enemy enemy = this.GetPooledObject(typeOfEnemy);
 
