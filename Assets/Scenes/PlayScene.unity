@@ -19938,15 +19938,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Player: {fileID: 1670789331596318625}
   m_EnemyDictionary:
-    m_Keys:
+    m_EnemiesPrefabs:
     - {fileID: 3466957623314033919, guid: 81a75584192bbae4599dd633f8164089, type: 3}
     - {fileID: 6751876454441992204, guid: 6008ecf565fb8fc4693c32a288f1d2c1, type: 3}
     - {fileID: 4987310970938077939, guid: 96bf3411cd5a4cc42a9663bdde0beee8, type: 3}
-    m_Amount: 050000000300000002000000
-    m_SpawnSpeed:
-    - 1
+    m_Amount: 020000000200000002000000
+    m_SpawnTime:
+    - 2
     - 3
-    - 6
+    - 7
   m_EnemiesPrefabs: []
 --- !u!1 &2041294549
 GameObject:

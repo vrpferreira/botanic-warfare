@@ -6,22 +6,22 @@ using UnityEngine;
 public class SerializableEnemyDictionary
 {
     [SerializeField]
-    private List<Enemy> m_Keys;
+    private List<Enemy> m_EnemiesPrefabs;
     [SerializeField]
     private List<int> m_Amount;
     [SerializeField]
-    private List<float> m_SpawnSpeed;
+    private List<float> m_SpawnTime;
 
     public void Add(Enemy key, int amount, float spawnSpeed)
     {
-        m_Keys.Add(key);
+        m_EnemiesPrefabs.Add(key);
         m_Amount.Add(amount);
-        m_SpawnSpeed.Add(spawnSpeed);
+        m_SpawnTime.Add(spawnSpeed);
     }
 
     public int GetAmount(Enemy key)
     {
-        int index = m_Keys.IndexOf(key);
+        int index = m_EnemiesPrefabs.IndexOf(key);
 
         if (index != -1)
         {
@@ -31,13 +31,13 @@ public class SerializableEnemyDictionary
         return -1;
     }
 
-    public float GetSpawnSpeed(Enemy key)
+    public float GetSpawnTime(Enemy key)
     {
-        int index = m_Keys.IndexOf(key);
+        int index = m_EnemiesPrefabs.IndexOf(key);
 
         if (index != -1)
         {
-            return m_SpawnSpeed[index];
+            return m_SpawnTime[index];
         }
 
         return -1;
@@ -45,6 +45,6 @@ public class SerializableEnemyDictionary
 
     public List<Enemy> GetKeys()
     {
-        return m_Keys;
+        return m_EnemiesPrefabs;
     }
 }

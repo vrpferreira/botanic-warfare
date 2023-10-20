@@ -1,13 +1,16 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyObjectPool : MonoBehaviour
 {
-    public Player m_Player;
-    public SerializableEnemyDictionary m_EnemyDictionary = new SerializableEnemyDictionary();
     public static EnemyObjectPool m_Instance;
-    public Dictionary<Enemy, List<Enemy>> m_PooledObjectsDictionary;
-    public List<Enemy> m_EnemiesPrefabs;
+    [SerializeField] private Player m_Player;
+    [SerializeField] private SerializableEnemyDictionary m_EnemyDictionary = new SerializableEnemyDictionary();
+    private Dictionary<Type, List<Enemy>> m_PooledEnemiesDictionary;
+    private Dictionary<Type, float> m_PooledEnemiesSpawnTimeDictionary;
+    private Dictionary<Type, float> m_PooledEnemiesLastSpawnTimeDictionary;
+    private List<Enemy> m_EnemiesPrefabs;
 
     private void Awake()
     {
@@ -19,7 +22,9 @@ public class EnemyObjectPool : MonoBehaviour
 
     private void Start()
     {
-        m_PooledObjectsDictionary = new Dictionary<Enemy, List<Enemy>>();
+        m_PooledEnemiesDictionary = new Dictionary<Type, List<Enemy>>();
+        m_PooledEnemiesSpawnTimeDictionary = new Dictionary<Type, float>();
+        m_PooledEnemiesLastSpawnTimeDictionary = new Dictionary<Type, float>();
 
         m_EnemiesPrefabs = m_EnemyDictionary.GetKeys();
 
@@ -35,33 +40,23 @@ public class EnemyObjectPool : MonoBehaviour
                 pooledObjects.Add(obj);
             }
 
-            m_PooledObjectsDictionary.Add(enemy, pooledObjects);
+            m_PooledEnemiesDictionary.Add(enemy.GetType(), pooledObjects);
+            m_PooledEnemiesSpawnTimeDictionary.Add(enemy.GetType(), m_EnemyDictionary.GetSpawnTime(enemy));
+            m_PooledEnemiesLastSpawnTimeDictionary[enemy.GetType()] = 0;
         }
 
-        //test
-        for (int j = 0; j < 10; j++)
-        {
-            Enemy enemy1 = this.GetPooledObject(m_EnemiesPrefabs[0]);
-
-            if (enemy1 != null)
-            {
-                enemy1.transform.position = new Vector3(j * 5, 0, 0);
-                enemy1.SetPlayer(m_Player);
-                enemy1.gameObject.SetActive(true);
-            }
-        }
     }
 
     private void Update()
     {
-
+        this.GenerateEnemies();
     }
 
-    public Enemy GetPooledObject(Enemy enemy)
+    public Enemy GetPooledObject(Type enemyType)
     {
-        if (m_PooledObjectsDictionary.ContainsKey(enemy))
+        if (m_PooledEnemiesDictionary.ContainsKey(enemyType))
         {
-            List<Enemy> pooledObjects = m_PooledObjectsDictionary[enemy];
+            List<Enemy> pooledObjects = m_PooledEnemiesDictionary[enemyType];
             foreach (Enemy obj in pooledObjects)
             {
                 if (!obj.gameObject.activeInHierarchy)
@@ -72,5 +67,29 @@ public class EnemyObjectPool : MonoBehaviour
         }
 
         return null;
+    }
+
+    private void GenerateEnemies()
+    {
+        foreach (Type typeOfEnemy in m_PooledEnemiesDictionary.Keys)
+        {
+            float spawnTime = m_PooledEnemiesSpawnTimeDictionary[typeOfEnemy];
+            float lastSpawnTime = m_PooledEnemiesLastSpawnTimeDictionary[typeOfEnemy];
+
+            if (Time.time - lastSpawnTime >= spawnTime)
+            {
+                lastSpawnTime = Time.time;
+                m_PooledEnemiesLastSpawnTimeDictionary[typeOfEnemy] = lastSpawnTime;
+
+                Enemy enemy = this.GetPooledObject(typeOfEnemy);
+
+                if (enemy != null)
+                {
+                    enemy.transform.position = new Vector3(0, 0, 0);
+                    enemy.SetPlayer(m_Player);
+                    enemy.gameObject.SetActive(true);
+                }
+            }
+        }
     }
 }
