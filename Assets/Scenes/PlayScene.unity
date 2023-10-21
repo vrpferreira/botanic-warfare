@@ -2072,9 +2072,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1816223260}
-  - component: {fileID: 1816223261}
+  - component: {fileID: 1816223262}
   m_Layer: 0
-  m_Name: Enemy Pool
+  m_Name: Enemy Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2095,7 +2095,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1816223261
+--- !u!114 &1816223262
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2104,31 +2104,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1816223259}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08182b887d86d3045a5ee15c8d632ff1, type: 3}
+  m_Script: {fileID: 11500000, guid: dfa4dffcd151b2e4382d7c35fddcc7d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Tilemap: {fileID: 1834281452}
   m_Player: {fileID: 1670789331596318625}
-  m_EnemyDictionary:
-    m_EnemiesPrefabs:
-    - {fileID: 3466957623314033919, guid: 81a75584192bbae4599dd633f8164089, type: 3}
-    - {fileID: 6751876454441992204, guid: 6008ecf565fb8fc4693c32a288f1d2c1, type: 3}
-    - {fileID: 4987310970938077939, guid: 96bf3411cd5a4cc42a9663bdde0beee8, type: 3}
-    m_Amount: 020000000200000002000000
-    m_SpawnTime:
-    - 2
-    - 3
-    - 7
   m_EnemySpawnDataList:
-  - m_Enemy: {fileID: 3466957623314033919, guid: 81a75584192bbae4599dd633f8164089, type: 3}
+  - m_EnemyPrefab: {fileID: 3466957623314033919, guid: 81a75584192bbae4599dd633f8164089, type: 3}
     m_Amount: 3
     m_SpawnTime: 2
-  - m_Enemy: {fileID: 6751876454441992204, guid: 6008ecf565fb8fc4693c32a288f1d2c1, type: 3}
-    m_Amount: 3
-    m_SpawnTime: 0
-  - m_Enemy: {fileID: 4987310970938077939, guid: 96bf3411cd5a4cc42a9663bdde0beee8, type: 3}
-    m_Amount: 5
-    m_SpawnTime: 0
+  - m_EnemyPrefab: {fileID: 6751876454441992204, guid: 6008ecf565fb8fc4693c32a288f1d2c1, type: 3}
+    m_Amount: 2
+    m_SpawnTime: 4
+  - m_EnemyPrefab: {fileID: 4987310970938077939, guid: 96bf3411cd5a4cc42a9663bdde0beee8, type: 3}
+    m_Amount: 1
+    m_SpawnTime: 6
 --- !u!1 &1834281449
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class EnemyObjectPool : MonoBehaviour
+public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Tilemap m_Tilemap;
     [SerializeField] private Player m_Player;
     [SerializeField] private List<EnemySpawnData> m_EnemySpawnDataList = new List<EnemySpawnData>();
     private Dictionary<Type, List<Enemy>> m_PooledEnemiesDictionary;
-    private Dictionary<Type, float> m_PooledEnemiesSpawnTimeDictionary;
-    private Dictionary<Type, float> m_PooledEnemiesLastSpawnTimeDictionary;
+    private Dictionary<Type, float> m_EnemiesLastSpawnTimeDictionary;
 
     private void Start()
     {
         m_PooledEnemiesDictionary = new Dictionary<Type, List<Enemy>>();
-        m_PooledEnemiesSpawnTimeDictionary = new Dictionary<Type, float>();
-        m_PooledEnemiesLastSpawnTimeDictionary = new Dictionary<Type, float>();
+        m_EnemiesLastSpawnTimeDictionary = new Dictionary<Type, float>();
 
         foreach (EnemySpawnData enemySpawnData in m_EnemySpawnDataList)
         {
@@ -32,8 +30,7 @@ public class EnemyObjectPool : MonoBehaviour
 
             Type typeOfEnemy = enemySpawnData.GetEnemyPrefab().GetType();
             m_PooledEnemiesDictionary[typeOfEnemy] = pooledObjects;
-            m_PooledEnemiesSpawnTimeDictionary[typeOfEnemy] = enemySpawnData.GetSpawnTime();
-            m_PooledEnemiesLastSpawnTimeDictionary[typeOfEnemy] = 0;
+            m_EnemiesLastSpawnTimeDictionary[typeOfEnemy] = 0;
         }
     }
 
@@ -42,7 +39,7 @@ public class EnemyObjectPool : MonoBehaviour
         this.HandleEnemySpawning();
     }
 
-    private Enemy GetPooledObject(Type enemyType)
+    private Enemy GetPooledEnemy(Type enemyType)
     {
         if (m_PooledEnemiesDictionary.ContainsKey(enemyType))
         {
@@ -59,29 +56,36 @@ public class EnemyObjectPool : MonoBehaviour
         return null;
     }
 
+    private void GenerateEnemy(Type typeOfEnemy)
+    {
+        Enemy enemy = this.GetPooledEnemy(typeOfEnemy);
+
+        if (enemy != null)
+        {
+            BoundsInt bounds = m_Tilemap.cellBounds;
+            Vector3Int tilePosition;
+            tilePosition = new Vector3Int(UnityEngine.Random.Range(bounds.x, bounds.x + bounds.size.x), UnityEngine.Random.Range(bounds.y, bounds.y + bounds.size.y), 0);
+            Vector3 spawnPosition = m_Tilemap.GetCellCenterWorld(tilePosition);
+            enemy.transform.position = spawnPosition;
+            enemy.SetPlayer(m_Player);
+            enemy.gameObject.SetActive(true);
+        }
+    }
+
     private void HandleEnemySpawning()
     {
-        foreach (Type typeOfEnemy in m_PooledEnemiesDictionary.Keys)
+        foreach (EnemySpawnData enemySpawnData in m_EnemySpawnDataList)
         {
-            float spawnTime = m_PooledEnemiesSpawnTimeDictionary[typeOfEnemy];
-            float lastSpawnTime = m_PooledEnemiesLastSpawnTimeDictionary[typeOfEnemy];
+            Type typeOfEnemy = enemySpawnData.GetEnemyPrefab().GetType();
+
+            float spawnTime = enemySpawnData.GetSpawnTime();
+            float lastSpawnTime = m_EnemiesLastSpawnTimeDictionary[typeOfEnemy];
 
             if (Time.time - lastSpawnTime >= spawnTime)
             {
-                m_PooledEnemiesLastSpawnTimeDictionary[typeOfEnemy] = Time.time;
+                m_EnemiesLastSpawnTimeDictionary[typeOfEnemy] = Time.time;
 
-                Enemy enemy = this.GetPooledObject(typeOfEnemy);
-
-                if (enemy != null)
-                {
-                    BoundsInt bounds = m_Tilemap.cellBounds;
-                    Vector3Int tilePosition;
-                    tilePosition = new Vector3Int(UnityEngine.Random.Range(bounds.x, bounds.x + bounds.size.x), UnityEngine.Random.Range(bounds.y, bounds.y + bounds.size.y), 0);
-                    Vector3 spawnPosition = m_Tilemap.GetCellCenterWorld(tilePosition);
-                    enemy.transform.position = spawnPosition;
-                    enemy.SetPlayer(m_Player);
-                    enemy.gameObject.SetActive(true);
-                }
+                this.GenerateEnemy(typeOfEnemy);
             }
         }
     }
