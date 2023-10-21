@@ -5,22 +5,12 @@ using UnityEngine.Tilemaps;
 
 public class EnemyObjectPool : MonoBehaviour
 {
-    public static EnemyObjectPool m_Instance;
     [SerializeField] private Tilemap m_Tilemap;
     [SerializeField] private Player m_Player;
-    [SerializeField] private SerializableEnemyDictionary m_EnemyDictionary = new SerializableEnemyDictionary();
+    [SerializeField] private List<EnemySpawnData> m_EnemySpawnDataList = new List<EnemySpawnData>();
     private Dictionary<Type, List<Enemy>> m_PooledEnemiesDictionary;
     private Dictionary<Type, float> m_PooledEnemiesSpawnTimeDictionary;
     private Dictionary<Type, float> m_PooledEnemiesLastSpawnTimeDictionary;
-    private List<Enemy> m_EnemiesPrefabs;
-
-    private void Awake()
-    {
-        if (m_Instance == null)
-        {
-            m_Instance = this;
-        }
-    }
 
     private void Start()
     {
@@ -28,33 +18,31 @@ public class EnemyObjectPool : MonoBehaviour
         m_PooledEnemiesSpawnTimeDictionary = new Dictionary<Type, float>();
         m_PooledEnemiesLastSpawnTimeDictionary = new Dictionary<Type, float>();
 
-        m_EnemiesPrefabs = m_EnemyDictionary.GetKeys();
-
-        foreach (Enemy enemy in m_EnemiesPrefabs)
+        foreach (EnemySpawnData enemySpawnData in m_EnemySpawnDataList)
         {
             List<Enemy> pooledObjects = new List<Enemy>();
 
-            for (int i = 0; i < m_EnemyDictionary.GetAmount(enemy); i++)
+            for (int i = 0; i < enemySpawnData.GetAmount(); i++)
             {
-                Enemy obj = Instantiate(enemy);
+                Enemy obj = Instantiate(enemySpawnData.GetEnemyPrefab());
                 obj.gameObject.SetActive(false);
                 obj.transform.parent = this.transform;
                 pooledObjects.Add(obj);
             }
 
-            m_PooledEnemiesDictionary.Add(enemy.GetType(), pooledObjects);
-            m_PooledEnemiesSpawnTimeDictionary.Add(enemy.GetType(), m_EnemyDictionary.GetSpawnTime(enemy));
-            m_PooledEnemiesLastSpawnTimeDictionary[enemy.GetType()] = 0;
+            Type typeOfEnemy = enemySpawnData.GetEnemyPrefab().GetType();
+            m_PooledEnemiesDictionary[typeOfEnemy] = pooledObjects;
+            m_PooledEnemiesSpawnTimeDictionary[typeOfEnemy] = enemySpawnData.GetSpawnTime();
+            m_PooledEnemiesLastSpawnTimeDictionary[typeOfEnemy] = 0;
         }
-
     }
 
     private void Update()
     {
-        this.GenerateEnemies();
+        this.HandleEnemySpawning();
     }
 
-    public Enemy GetPooledObject(Type enemyType)
+    private Enemy GetPooledObject(Type enemyType)
     {
         if (m_PooledEnemiesDictionary.ContainsKey(enemyType))
         {
@@ -71,7 +59,7 @@ public class EnemyObjectPool : MonoBehaviour
         return null;
     }
 
-    private void GenerateEnemies()
+    private void HandleEnemySpawning()
     {
         foreach (Type typeOfEnemy in m_PooledEnemiesDictionary.Keys)
         {
