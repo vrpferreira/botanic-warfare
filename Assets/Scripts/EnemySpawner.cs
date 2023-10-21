@@ -68,6 +68,7 @@ public class EnemySpawner : MonoBehaviour
             Vector3 spawnPosition = m_Tilemap.GetCellCenterWorld(tilePosition);
             enemy.transform.position = spawnPosition;
             enemy.SetPlayer(m_Player);
+            enemy.ResetHealth();
             enemy.gameObject.SetActive(true);
         }
     }

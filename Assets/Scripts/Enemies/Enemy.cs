@@ -24,6 +24,11 @@ public class Enemy : MonoBehaviour
 
             transform.position += direction * m_Speed * Time.deltaTime;
         }
+
+        if (m_Health <= 0)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
     public void ApplyDamage(int damage)
@@ -38,9 +43,10 @@ public class Enemy : MonoBehaviour
         m_FloatingHealthBar.UpdateHealthBar(m_Health, m_MaxHealth);
     }
 
-    public int GetHealth()
+    public void ResetHealth()
     {
-        return m_Health;
+        m_Health = m_MaxHealth;
+        m_FloatingHealthBar.UpdateHealthBar(m_Health, m_MaxHealth);
     }
 
     public void SetPlayer(Player player)
