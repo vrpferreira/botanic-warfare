@@ -56,8 +56,10 @@ public class EnemySpawner : MonoBehaviour
         return null;
     }
 
-    private void GenerateEnemy(Type typeOfEnemy)
+    private void GenerateEnemy(EnemySpawnData enemySpawnData)
     {
+        Type typeOfEnemy = enemySpawnData.GetEnemyPrefab().GetType();
+
         Enemy enemy = this.GetPooledEnemy(typeOfEnemy);
 
         if (enemy != null)
@@ -69,6 +71,8 @@ public class EnemySpawner : MonoBehaviour
             enemy.transform.position = spawnPosition;
             enemy.SetPlayer(m_Player);
             enemy.ResetHealth();
+            enemy.SetMaxHealth(enemySpawnData.GetMaxHealth());
+            enemy.SetSpeed(enemySpawnData.GetSpeed());
             enemy.gameObject.SetActive(true);
         }
     }
@@ -86,7 +90,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 m_EnemiesLastSpawnTimeDictionary[typeOfEnemy] = Time.time;
 
-                this.GenerateEnemy(typeOfEnemy);
+                this.GenerateEnemy(enemySpawnData);
             }
         }
     }

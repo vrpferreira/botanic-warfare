@@ -53,4 +53,14 @@ public class Enemy : MonoBehaviour
     {
         m_Player = player;
     }
+
+    public void SetMaxHealth(int maxHealth)
+    {
+        m_MaxHealth = maxHealth;
+    }
+
+    public void SetSpeed(float speed)
+    {
+        m_Speed = speed;
+    }
 }

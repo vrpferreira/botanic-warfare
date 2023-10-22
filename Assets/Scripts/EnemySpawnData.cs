@@ -6,12 +6,11 @@ using UnityEngine;
 [Serializable]
 public class EnemySpawnData
 {
-    [SerializeField]
-    private Enemy m_EnemyPrefab;
-    [SerializeField]
-    private int m_Amount;
-    [SerializeField]
-    private float m_SpawnTime;
+    [SerializeField] private Enemy m_EnemyPrefab;
+    [SerializeField] private int m_Amount;
+    [SerializeField] private float m_SpawnTime;
+    [SerializeField] private int m_MaxHealth;
+    [SerializeField] private float m_Speed;
 
     public Enemy GetEnemyPrefab()
     {
@@ -26,5 +25,15 @@ public class EnemySpawnData
     public float GetSpawnTime()
     {
         return m_SpawnTime;
+    }
+
+    public int GetMaxHealth()
+    {
+        return m_MaxHealth;
+    }
+
+    public float GetSpeed()
+    {
+        return m_Speed;
     }
 }
