@@ -20,7 +20,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        //Move();
         Aim();
     }
 
@@ -96,8 +95,9 @@ public class Player : MonoBehaviour
             m_FrontArmParentBone.rotation = Quaternion.Euler(m_FrontArmParentBone.rotation.x, 180, finalRotation);
             m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 180, finalRotation);
 
-            //transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
-            transform.localScale = new Vector3(-1, 1, 1);
+            //m_FrontArmParentBone.localScale = new Vector3(-1, 1, 1);
+            //m_BackArmParentBone.localScale = new Vector3(-1, 1, 1);
+            //transform.localScale = new Vector3(-1, 1, 1);
         }
         else
         {
@@ -107,9 +107,9 @@ public class Player : MonoBehaviour
             m_FrontArmParentBone.rotation = Quaternion.Euler(m_FrontArmParentBone.rotation.x, 0, finalRotation);
             m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 0, finalRotation);
 
-            //transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            transform.localScale = new Vector3(1, 1, 1);
-
+            //m_FrontArmParentBone.localScale = new Vector3(1, 1, 1);
+            //m_BackArmParentBone.localScale = new Vector3(1, 1, 1);
+            //transform.localScale = new Vector3(1, 1, 1);
         }
     }
 }
