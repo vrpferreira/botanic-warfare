@@ -1,66 +1,21 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerAim : MonoBehaviour
 {
-    public float m_MoveSpeed = 5;
-    public float m_DividerAnimationWalk = 1;
     public Transform m_FrontArmParentBone;
     public Transform m_BackArmParentBone;
     public Transform m_FrontArmDirectionPoint;
     public Weapon m_WeaponFront;
     public Weapon m_WeaponBack;
-    private Animator m_Animator;
-    private Rigidbody2D m_Rigidbody;
 
     private void Start()
     {
-        m_Animator = GetComponent<Animator>();
-        m_Rigidbody = GetComponent<Rigidbody2D>();
+
     }
 
     private void Update()
     {
         Aim();
-    }
-
-    private void FixedUpdate()
-    {
-        Move();
-    }
-
-    private void Move()
-    {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-
-        Vector3 moveDirection = new Vector3(horizontalInput, verticalInput, 0.0f);
-        //transform.position += moveDirection * m_MoveSpeed * Time.deltaTime;
-
-        m_Rigidbody.MovePosition(
-            new Vector3(
-                transform.position.x + moveDirection.x * m_MoveSpeed * Time.fixedDeltaTime,
-                transform.position.y + moveDirection.y * m_MoveSpeed * Time.fixedDeltaTime,
-                0
-            )
-        );
-
-        if (moveDirection.magnitude > 0)
-        {
-            m_Animator.SetBool("Moving", true);
-
-            if (m_MoveSpeed > 3)
-            {
-                m_Animator.SetBool("Running", true);
-            }
-            else
-            {
-                m_Animator.SetBool("Running", false);
-            }
-        }
-        else
-        {
-            m_Animator.SetBool("Moving", false);
-        }
     }
 
     private void Aim()
@@ -94,10 +49,6 @@ public class Player : MonoBehaviour
 
             m_FrontArmParentBone.rotation = Quaternion.Euler(m_FrontArmParentBone.rotation.x, 180, finalRotation);
             m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 180, finalRotation);
-
-            //m_FrontArmParentBone.localScale = new Vector3(-1, 1, 1);
-            //m_BackArmParentBone.localScale = new Vector3(-1, 1, 1);
-            //transform.localScale = new Vector3(-1, 1, 1);
         }
         else
         {
@@ -106,10 +57,6 @@ public class Player : MonoBehaviour
 
             m_FrontArmParentBone.rotation = Quaternion.Euler(m_FrontArmParentBone.rotation.x, 0, finalRotation);
             m_BackArmParentBone.rotation = Quaternion.Euler(m_BackArmParentBone.rotation.x, 0, finalRotation);
-
-            //m_FrontArmParentBone.localScale = new Vector3(1, 1, 1);
-            //m_BackArmParentBone.localScale = new Vector3(1, 1, 1);
-            //transform.localScale = new Vector3(1, 1, 1);
         }
     }
 }

@@ -5,7 +5,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int m_MaxHealth = 10;
     [SerializeField] private float m_Speed = 2;
     [SerializeField] private FloatingHealthBar m_FloatingHealthBar;
-    [SerializeField] Player m_Player;
+    [SerializeField] Transform m_Player;
 
     private int m_Health = 0;
 
@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour
         m_FloatingHealthBar.UpdateHealthBar(m_Health, m_MaxHealth);
     }
 
-    public void SetPlayer(Player player)
+    public void SetPlayer(Transform player)
     {
         m_Player = player;
     }

@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Tilemap m_Tilemap;
-    [SerializeField] private Player m_Player;
+    [SerializeField] private Transform m_Player;
     [SerializeField] private List<EnemySpawnData> m_EnemySpawnDataList = new List<EnemySpawnData>();
     private Dictionary<Type, List<Enemy>> m_PooledEnemiesDictionary;
     private Dictionary<Type, float> m_EnemiesLastSpawnTimeDictionary;
