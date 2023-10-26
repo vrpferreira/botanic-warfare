@@ -17,6 +17,9 @@ public class Weapon : MonoBehaviour
     public float m_FireRate = 1;
     public float m_BulletSpeed = 1;
 
+    [SerializeField]
+    private BulletObjectPool m_BulletObjectPool;
+
     private float m_AimLineDistance = 0f;
     private Vector3 m_AimDirection;
     private Vector3 m_MappedAimMousePosition;
@@ -63,7 +66,7 @@ public class Weapon : MonoBehaviour
 
     private void Shoot()
     {
-        Bullet bullet = BulletObjectPool.m_Instance.GetPooledObject();
+        Bullet bullet = m_BulletObjectPool.GetPooledObject();
 
         if (bullet != null)
         {

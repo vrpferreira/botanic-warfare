@@ -1725,7 +1725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e8911b9c078354790f1fb59aa9407b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AmountToPool: 200
+  m_AmountToPool: 10
   m_PooledObjects: []
   m_ObjectToPool: {fileID: 409612065917562958, guid: fa9a7f9ff795df24f83ca4ea26e198f0, type: 3}
 --- !u!4 &748163700
@@ -9889,6 +9889,10 @@ PrefabInstance:
       propertyPath: m_BulletSpeed
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1269571229111827799, guid: 455b6aacf2714eb4c9f84f2f85582519, type: 3}
+      propertyPath: m_BulletObjectPool
+      value: 
+      objectReference: {fileID: 748163699}
     - target: {fileID: 1799129598679352459, guid: 455b6aacf2714eb4c9f84f2f85582519, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -11154,6 +11158,10 @@ PrefabInstance:
       propertyPath: m_BulletSpeed
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1269571229111827799, guid: 455b6aacf2714eb4c9f84f2f85582519, type: 3}
+      propertyPath: m_BulletObjectPool
+      value: 
+      objectReference: {fileID: 748163699}
     - target: {fileID: 1799129598679352459, guid: 455b6aacf2714eb4c9f84f2f85582519, type: 3}
       propertyPath: m_Layer
       value: 6

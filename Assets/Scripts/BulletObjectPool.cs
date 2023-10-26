@@ -3,18 +3,9 @@ using UnityEngine;
 
 public class BulletObjectPool : MonoBehaviour
 {
-    public static BulletObjectPool m_Instance;
     public int m_AmountToPool = 0;
     public List<Bullet> m_PooledObjects;
     public Bullet m_ObjectToPool;
-
-    private void Awake()
-    {
-        if (m_Instance == null)
-        {
-            m_Instance = this;
-        }
-    }
 
     private void Start()
     {
