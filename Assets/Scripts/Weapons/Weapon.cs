@@ -13,12 +13,12 @@ public class Weapon : MonoBehaviour
     public SpriteRenderer m_SpriteRenderer;
     public Transform m_AimPoint0;
     public Transform m_AimPoint1;
-    public Bullet m_Bullet;
     public float m_FireRate = 1;
     public float m_BulletSpeed = 1;
 
-    [SerializeField]
-    private BulletObjectPool m_BulletObjectPool;
+    [SerializeField] private GameObject m_BulletTrail;
+    [SerializeField] private float m_WeaponRange = 10f;
+    [SerializeField] private Animator m_MuzzleFlashAnimator;
 
     private float m_AimLineDistance = 0f;
     private Vector3 m_AimDirection;
@@ -50,8 +50,9 @@ public class Weapon : MonoBehaviour
         m_AimDirection = (m_AimPoint1.position - m_AimPoint0.position).normalized;
 
         m_MappedAimMousePosition = m_AimPoint0.position + m_AimDirection * m_AimLineDistance;
+        Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        //Debug.DrawLine(m_AimPoint0.position, m_MappedAimMousePosition, m_AimLineExtensionColor);
+        Debug.DrawLine(m_AimPoint0.position, worldMousePosition, Color.white);
     }
 
     public Vector3 GetMappedAimMousePosition()
@@ -59,13 +60,15 @@ public class Weapon : MonoBehaviour
         return m_MappedAimMousePosition;
     }
 
-    public void SetAimLindeDistance(float distance)
+    public void SetAimLineDistance(float distance)
     {
         m_AimLineDistance = distance;
     }
 
     private void Shoot()
     {
+        print("Shoot");
+        /*
         Bullet bullet = m_BulletObjectPool.GetPooledObject();
 
         if (bullet != null)
@@ -75,6 +78,26 @@ public class Weapon : MonoBehaviour
             bullet.SetDirection(m_AimDirection);
             bullet.SetSpeed(m_BulletSpeed);
             bullet.gameObject.SetActive(true);
+        }
+        */
+
+        //m_MuzzleFlashAnimator.SetTrigger("Shoot");
+
+        var hit = Physics2D.Raycast(m_AimPoint0.position, m_AimDirection, m_WeaponRange);
+
+        var trail = Instantiate(m_BulletTrail, m_AimPoint0.position, transform.rotation);
+
+        var trailScript = trail.GetComponent<BulletTrail>();
+        if (hit.collider != null)
+        {
+            trailScript.SetTargetPosition(hit.point);
+            //var hittable = hit.collider.GetComponent<IHittable>();
+            //hittable?.Hit();
+        }
+        else
+        {
+            var endPosition = m_AimPoint0.position + m_AimDirection * m_WeaponRange;
+            trailScript.SetTargetPosition(endPosition);
         }
     }
 }

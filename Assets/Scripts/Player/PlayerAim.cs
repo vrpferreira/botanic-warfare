@@ -30,8 +30,8 @@ public class PlayerAim : MonoBehaviour
         Vector3 vectorDirectionArm = (m_FrontArmDirectionPoint.position - m_FrontArmParentBone.position).normalized;
         float distance = Vector2.Distance(m_FrontArmParentBone.position, worldMousePosition);
 
-        m_WeaponFront.SetAimLindeDistance(distance);
-        m_WeaponBack.SetAimLindeDistance(distance);
+        m_WeaponFront.SetAimLineDistance(distance);
+        m_WeaponBack.SetAimLineDistance(distance);
 
         Vector3 weaponMousePointMapped = m_WeaponFront.GetMappedAimMousePosition();
 
