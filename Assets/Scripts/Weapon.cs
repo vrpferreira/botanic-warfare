@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     private BulletObjectPool m_BulletObjectPool;
 
-    private float m_AimLineDistance = 0f;
+    private float m_AimDistance = 0f;
     private Vector3 m_AimDirection;
     private Vector3 m_MappedAimMousePosition;
     private float m_TimeSinceLastShot = 0;
@@ -49,9 +49,14 @@ public class Weapon : MonoBehaviour
     {
         m_AimDirection = (m_AimPoint1.position - m_AimPoint0.position).normalized;
 
-        m_MappedAimMousePosition = m_AimPoint0.position + m_AimDirection * m_AimLineDistance;
+        m_MappedAimMousePosition = m_AimPoint0.position + m_AimDirection * m_AimDistance;
 
-        //Debug.DrawLine(m_AimPoint0.position, m_MappedAimMousePosition, m_AimLineExtensionColor);
+        Debug.DrawLine(m_AimPoint0.position, m_MappedAimMousePosition, Color.white);
+    }
+
+    public Transform GetBulletSpawn()
+    {
+        return m_AimPoint0;
     }
 
     public Vector3 GetMappedAimMousePosition()
@@ -59,9 +64,9 @@ public class Weapon : MonoBehaviour
         return m_MappedAimMousePosition;
     }
 
-    public void SetAimLindeDistance(float distance)
+    public void SetAimDistance(float distance)
     {
-        m_AimLineDistance = distance;
+        m_AimDistance = distance;
     }
 
     private void Shoot()
