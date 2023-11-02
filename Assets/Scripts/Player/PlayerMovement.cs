@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private float m_HorizontalInput;
     private float m_VerticalInput;
     private bool m_IsFacingRight;
+    private Vector3 m_WorldMousePosition;
 
     private void Start()
     {
@@ -26,15 +27,9 @@ public class PlayerMovement : MonoBehaviour
         m_HorizontalInput = Input.GetAxis("Horizontal");
         m_VerticalInput = Input.GetAxis("Vertical");
 
-        Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (m_IsFacingRight && worldMousePosition.x < transform.position.x)
-        {
-            this.Flip();
-        }
-        else if (!m_IsFacingRight && worldMousePosition.x > transform.position.x)
-        {
-            this.Flip();
-        }
+        m_WorldMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        this.HandleFlip();
     }
 
     private void FixedUpdate()
@@ -65,6 +60,18 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             m_Animator.SetBool("Moving", false);
+        }
+    }
+
+    private void HandleFlip()
+    {
+        if (m_IsFacingRight && m_WorldMousePosition.x < transform.position.x)
+        {
+            this.Flip();
+        }
+        else if (!m_IsFacingRight && m_WorldMousePosition.x > transform.position.x)
+        {
+            this.Flip();
         }
     }
 
